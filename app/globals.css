@@ -2,3 +2,38 @@
 @plugin "daisyui";
 
 
+@plugin "daisyui/theme" {
+    name: "biddingsystem";
+    default: false;
+    prefersdark: false;
+    color-scheme: "light";
+    --color-base-100: oklch(100% 0 0);
+    --color-base-200: oklch(98% 0 0);
+    --color-base-300: oklch(95% 0 0);
+    --color-base-content: oklch(21% 0.006 285.885);
+    --color-primary: #2D336B;
+    --color-primary-content: oklch(93% 0.034 272.788);
+    --color-secondary: #7886C7;
+    --color-secondary-content: oklch(94% 0.028 342.258);
+    --color-accent: #A9B5DF;
+    --color-accent-content: oklch(55% 0.046 257.417);
+    --color-neutral: #ECF1F7;
+    --color-neutral-content: oklch(44% 0.043 257.281);
+    --color-info: oklch(74% 0.16 232.661);
+    --color-info-content: oklch(29% 0.066 243.157);
+    --color-success: oklch(79% 0.209 151.711);
+    --color-success-content: oklch(37% 0.077 168.94);
+    --color-warning: oklch(82% 0.189 84.429);
+    --color-warning-content: oklch(41% 0.112 45.904);
+    --color-error: oklch(63% 0.237 25.331);
+    --color-error-content: oklch(98% 0.003 247.858);
+    --radius-selector: 0.5rem;
+    --radius-field: 0.25rem;
+    --radius-box: 0.5rem;
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+    --border: 1px;
+    --depth: 1;
+    --noise: 0;
+  }
+  
