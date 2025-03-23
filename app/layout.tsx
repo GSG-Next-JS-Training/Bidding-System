@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Manrope} from "next/font/google";
 import "./globals.css";
+import { connection } from "@/lib/mongodb";
+
 
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
@@ -15,6 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  connection();
+
   return (
     <html lang="en" data-theme="biddingsystem">
       <body
