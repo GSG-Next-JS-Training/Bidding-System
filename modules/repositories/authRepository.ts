@@ -1,6 +1,7 @@
 import { IUser } from "@/database/user-model";
 import { findUserByEmail } from "../services/authServices";
 import { generateCode, generateToken, isValidPassword, sendEmail } from "@/utils/auth";
+import bcrypt from "bcryptjs";
 
 export const loginUser = async (
   email: string,
@@ -34,7 +35,8 @@ export const verifyCode = async (email : string, code : string, password : strin
   const user = await findUserByEmail(email);
   if(!user || user.sendCode !== code) throw new Error("Invalid Code");
 
-  user.password = password;
+  const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
+  user.password = hashedPassword;
   user.sendCode = ''; 
   await user.save();
   return true;
