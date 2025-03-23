@@ -9,7 +9,7 @@ export const loginUser = async (
   const user = await findUserByEmail(email);
   if (!user) throw new Error("Invalid Credentials");
 
-  const match = isValidPassword(password, user.password);
+  const match = await isValidPassword(password, user.password);
   if(!match) throw new Error("Invalid Credentials");
 
   const token = generateToken(user);

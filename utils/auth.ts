@@ -11,6 +11,6 @@ export const generateToken = (user : IUser) => {
 }
 
 export const isValidPassword = async (password : string, hashedPassword : string) =>{
-    return bcrypt.compareSync(password, hashedPassword);
+    return bcrypt.compare(password, hashedPassword);
   }
 
