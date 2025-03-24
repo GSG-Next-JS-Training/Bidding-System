@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { handlerWrapper } from "@/lib/apiHandler";
 import { verifyCode } from "@/modules/repositories/authRepository";
 
-
 export const verifyCodeHandler = async (req: NextRequest) => {
   const { email, code, password } = await req.json();
   if (!email || !code || !password) {
