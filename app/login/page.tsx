@@ -1,16 +1,7 @@
-
-
-
 import HandleLogin from "@/component/handle-login/handle-login";
 
-
 const Login = () => {
-
-  return (
-     <div>  
-        <HandleLogin />
-    </div>
-  )
+  return <HandleLogin />;
 };
 
 export default Login;

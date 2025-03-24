@@ -1,3 +1,4 @@
+"use client"
 import { useFormik } from "formik";
 import { INITIAL_VALUES } from "../constant";
 import { LoginValues } from "../types";

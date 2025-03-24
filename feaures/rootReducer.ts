@@ -1,12 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { snackbarReducer } from "./snackbarSlice/snackbarSlice";
-
-
-const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
+import snackbarReducer from "./snackbarSlice/snackbarSlice";
 
 const rootReducer = combineReducers({
-  auth: persistedAuthReducer,
-  snackbar:snackbarReducer,
+  snackbar: snackbarReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

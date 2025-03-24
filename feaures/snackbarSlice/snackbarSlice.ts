@@ -1,53 +1,41 @@
-import {  ReactNode } from "react";
-import { AlertColor } from "@mui/material/Alert";
-import { SnackbarOrigin } from "@mui/material/Snackbar";
-import { createSlice } from "@reduxjs/toolkit";
-interface State {
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ReactNode } from "react";
+
+export interface SnackbarState {
   open: boolean;
-  severity: AlertColor;
-  variant: "filled" | "outlined" | "standard";
-  title?: ReactNode;
+  type: "info" | "success" | "warning" | "error";
   message: ReactNode;
-  anchorOrigin: SnackbarOrigin;
-  action: ReactNode;
-  autoHideDuration: number | null | undefined;
-  icon: ReactNode;
+  duration: number;
 }
-export const initialState: State = {
+
+export const initialState: SnackbarState = {
   open: false,
-  severity: "info",
-  variant: "filled",
-  title: null,
-  message: "",
-  anchorOrigin: { vertical: "top", horizontal: "center" },
-  action: null,
-  autoHideDuration: 6000,
-  icon: undefined,
+  type: "success",
+  message: "hello",
+  duration: 3000,
 };
 
+interface ShowSnackbarPayload {
+  message: ReactNode;
+  type?: "info" | "success" | "warning" | "error";
+  duration?: number;
+}
 
-
-// interface ReducerAction {
-//   type: REDUCER_ACTION_TYPE;
-//   payload?: ShowSnackbarPayload;
-// }
-
-export const snackBarSlice = createSlice({
+export const snackbarSlice = createSlice({
   name: "snackbar",
   initialState,
   reducers: {
-    showSnackbar: (state, action) => {
+    showSnackbar: (state, action: PayloadAction<ShowSnackbarPayload>) => {
       state.open = true;
       state.message = action.payload.message;
-      state.severity = action.payload.severity;
-      
+      state.type = action.payload.type || "success";
+      state.duration = action.payload.duration ?? 3000;
     },
-    hideSnackbar: (state, action) => {
+    hideSnackbar: (state) => {
       state.open = false;
-      state.message = action.payload.message;
     },
   },
 });
 
-export const {showSnackbar,hideSnackbar } = snackBarSlice.actions;
-export default snackBarSlice.reducer;
+export const { showSnackbar, hideSnackbar } = snackbarSlice.actions;
+export default snackbarSlice.reducer;
