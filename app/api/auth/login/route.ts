@@ -10,9 +10,9 @@ const loginHandler = async (req: NextRequest) => {
   (await cookies()).set('auth-token', token, {
     httpOnly : true,
     secure : process.env.NODE_ENV === 'production',
-    maxAge : 3600
+    maxAge : 86400
   });
-  return NextResponse.json({ message: token }, { status: 200 });
+  return NextResponse.json({token}, { status: 200 });
 };
 
 export const POST = handlerWrapper(loginHandler);

@@ -1,18 +1,15 @@
-import bcrypt from "bcryptjs";
 import { IUser } from "@/database/user-model";
 import { findUserByEmail } from "../services/authServices";
-import { generateCode, generateToken, isValidPassword, sendEmail } from "@/utils/auth";
+import { generateCode, generateToken, hashPassword, isValidPassword, sendEmail } from "@/utils/auth";
 
-export const loginUser = async (email: string, password: string) : Promise<{ user: IUser; token: string }> => {
-  if(!email || !password) throw new Error("email and password are required");
-  
+export const loginUser = async (email: string, password: string) : Promise<{ user: IUser; token : string }> => {
   const user = await findUserByEmail(email);
   if (!user) throw new Error("Invalid Credentials");
 
   const match = await isValidPassword(password, user.password);
   if(!match) throw new Error("Invalid Credentials");
 
-  const token = generateToken(user);
+  const token = await generateToken(user);
 
   return { user, token };
 };
@@ -29,14 +26,21 @@ export const forgotPassword = async (email : string) =>{
   await sendEmail(email, "Password Reset Code", `Your password reset code is ${code}`);
 }
 
-export const verifyCode = async (email : string, code : string, password : string) =>{
-  if(!email || !code || !password) throw new Error("Email, code and password are required");
+export const verifyCode = async (email : string, code : string) =>{
   const user = await findUserByEmail(email);
   if(!user || user.sendCode !== code) throw new Error("Invalid Code");
 
-  const hashedPassword = await bcrypt.hash(password, Number(process.env.SALT_ROUND));
-  user.password = hashedPassword;
   user.sendCode = ''; 
+  await user.save();
+  return true;
+}
+
+export const resetPassword = async (email : string, password : string) =>{
+  const user = await findUserByEmail(email);
+  if(!user) throw new Error("Invalid Email");
+
+  const hashedPassword = await hashPassword(password);
+  user.password = hashedPassword;
   await user.save();
   return true;
 }
