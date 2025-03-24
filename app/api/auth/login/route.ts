@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
-import { handlerWrapper } from "@/lib/apiHandler";
-import { loginUser } from "@/modules/repositories/authRepository";
 import { cookies } from "next/headers";
+import { handlerWrapper } from "@/lib/apiHandler";
+import { NextRequest, NextResponse } from "next/server";
+import { loginUser } from "@/modules/repositories/authRepository";
 
 const loginHandler = async (req: NextRequest) => {
   const body = await req.json();

@@ -1,13 +1,9 @@
 import { handlerWrapper } from "@/lib/apiHandler";
-import { forgotPassword } from "@/modules/repositories/authRepository";
 import { NextRequest, NextResponse } from "next/server";
+import { forgotPassword } from "@/modules/repositories/authRepository";
 
-export const forgotPasswordHandler = async (req: NextRequest) => {
+const forgotPasswordHandler = async (req: NextRequest) => {
     const { email } = await req.json();
-    if (!email) {
-      return NextResponse.json({ message: "Email is required" }, { status: 400 });
-    }
-  
     await forgotPassword(email);
     return NextResponse.json({ message: "Reset code sent" }, { status: 200 });
   };

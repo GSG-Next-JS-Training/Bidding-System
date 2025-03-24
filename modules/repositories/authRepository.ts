@@ -1,12 +1,9 @@
+import bcrypt from "bcryptjs";
 import { IUser } from "@/database/user-model";
 import { findUserByEmail } from "../services/authServices";
 import { generateCode, generateToken, isValidPassword, sendEmail } from "@/utils/auth";
-import bcrypt from "bcryptjs";
 
-export const loginUser = async (
-  email: string,
-  password: string,
-): Promise<{ user: IUser; token: string }> => {
+export const loginUser = async (email: string, password: string) : Promise<{ user: IUser; token: string }> => {
   if(!email || !password) throw new Error("email and password are required");
   
   const user = await findUserByEmail(email);
@@ -21,6 +18,7 @@ export const loginUser = async (
 };
 
 export const forgotPassword = async (email : string) =>{
+  if(!email) throw new Error("Email is required");
   const user = await findUserByEmail(email);
   if(!user) throw new Error("Invalid Email");
 
@@ -32,6 +30,7 @@ export const forgotPassword = async (email : string) =>{
 }
 
 export const verifyCode = async (email : string, code : string, password : string) =>{
+  if(!email || !code || !password) throw new Error("Email, code and password are required");
   const user = await findUserByEmail(email);
   if(!user || user.sendCode !== code) throw new Error("Invalid Code");
 
