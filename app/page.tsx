@@ -1,8 +1,14 @@
 
-export default function Home() {
-  return (
-<div>
 
-</div>
-  );
+const page = () => {
+  return (
+    <div >
+
+          <button className="btn btn-primary">Button</button>
+
+
+    </div>
+  )
 }
+
+export default page
