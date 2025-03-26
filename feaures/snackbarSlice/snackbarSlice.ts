@@ -15,7 +15,7 @@ export const initialState: SnackbarState = {
   duration: 3000,
 };
 
-interface ShowSnackbarPayload {
+export interface ShowSnackbarPayload {
   message: ReactNode;
   type?: "info" | "success" | "warning" | "error";
   duration?: number;

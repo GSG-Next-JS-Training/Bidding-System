@@ -26,10 +26,8 @@ const HandleLogin = () => {
                 </label>
                 <BiddingTextField
                   id="email"
-                  type="email"
                   placeholder="your Email"
                   name="email"
-                  required
                   className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
                 />
               </div>
