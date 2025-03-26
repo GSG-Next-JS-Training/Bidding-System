@@ -14,14 +14,13 @@ interface ILink {
 
 const Navbar = () => {
   const USERS: IUser[] = [
-    { name: "Palestine Biddings", role: 'bedding-company' },
+    { name: "Palestine Biddings", role: "bedding-company" },
     { name: "Rads Offers", role: "offer-company" },
     { name: "Doe Admin", role: "admin" }
   ];
 
   const user: IUser | false = USERS[0];
 
- 
   const links: ILink[] = useMemo(() => {
     if (!user) return [];
 
@@ -32,7 +31,7 @@ const Navbar = () => {
           { name: "New Biddings", url: "new-biddings" },
           { name: "Users", url: "users" }
         ];
-      case 'bedding-company':
+      case "bedding-company":
         return [
           { name: "New Offers", url: "new-offers" },
           { name: "My Biddings", url: "my-biddings" },
@@ -49,13 +48,25 @@ const Navbar = () => {
   }, [user]);
 
   return (
-    <div className="navbar bg-base-100 shadow-sm px-20">
+    <div className="navbar bg-base-100 shadow-sm px-4 lg:px-20">
+      
+     
+
       <div className="flex-1">
         <Link href="/" className="text-xl btn-ghost text-primary font-bold">
           Tending <span className="text-accent">System</span>
         </Link>
       </div>
-      <div className="flex gap-9 items-center">
+
+ <div className="lg:hidden">
+        <label htmlFor="menu-drawer" className="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </label>
+      </div>
+     
+      <div className="hidden lg:flex gap-9 items-center">
         {links.map((link, index) => (
           <Link className="link-primary cursor-pointer" key={index} href={link.url}>
             {link.name}
@@ -65,9 +76,9 @@ const Navbar = () => {
         {user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost avatar">
-             {user.name}
+              {user.name}
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
               <li><a className="justify-between">Profile<span className="badge">New</span></a></li>
               <li><a>Settings</a></li>
               <li><a>Logout</a></li>
@@ -76,6 +87,29 @@ const Navbar = () => {
         ) : (
           <Link href="/login" className="btn btn-primary">Login</Link>
         )}
+      </div>
+
+      {/* Drawer Content */}
+      <input type="checkbox" id="menu-drawer" className="drawer-toggle" />
+      <div className="drawer-side">
+        <label htmlFor="menu-drawer" className="drawer-overlay"></label>
+        <ul className="menu p-4 w-80 min-h-full bg-base-200">
+          <li><Link href="/">Home</Link></li>
+          {links.map((link, index) => (
+            <li key={index}>
+              <Link href={link.url}>{link.name}</Link>
+            </li>
+          ))}
+          {user ? (
+            <>
+              <li><a>Profile</a></li>
+              <li><a>Settings</a></li>
+              <li><a>Logout</a></li>
+            </>
+          ) : (
+            <li><Link href="/login">Login</Link></li>
+          )}
+        </ul>
       </div>
     </div>
   );
