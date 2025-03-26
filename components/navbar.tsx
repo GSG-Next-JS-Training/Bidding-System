@@ -54,8 +54,6 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm px-4 lg:px-20">
      
-   
-
       <div className="flex-1">
         <Link href="/" className="text-xl btn-ghost text-primary font-bold">
           Tending <span className="text-accent">System</span>
@@ -112,7 +110,6 @@ const Navbar = () => {
         )}
       </div>
 
- 
       <input type="checkbox" id="menu-drawer" className="drawer-toggle" />
       <div className="drawer-side">
         <label htmlFor="menu-drawer" className="drawer-overlay"></label>
@@ -135,8 +132,6 @@ const Navbar = () => {
         </ul>
       </div>
 
-      
-     
     </div>
   );
 };
