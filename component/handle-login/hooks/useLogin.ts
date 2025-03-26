@@ -8,21 +8,20 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "../api";
 import { useAppDispatch } from "@/store";
 import { loginSuccess } from "@/feaures/authSlice/authSlice";
+import { useRouter } from "next/navigation";
+import { redirectByRole } from "@/lib";
 
 const useLogin = () => {
   const { displaySnackbar } = useSnackbar();
   const dispatch = useAppDispatch();
-  const {
-    mutate: loginMutate,
-    isPending,
-    isSuccess,
-  } = useMutation({
+  const router = useRouter();
+
+  const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      dispatch(
-        loginSuccess({ token: data.authentication, userType: data.userType })
-      );
+      dispatch(loginSuccess({ token: data.token, userType: data.userType }));
       displaySnackbar({ type: "success", message: "success login" });
+      redirectByRole(data.userType, router);
     },
     onError: () => {
       displaySnackbar({
@@ -41,7 +40,7 @@ const useLogin = () => {
     validateOnMount: true,
   });
 
-  return { formik, isPending, isSuccess };
+  return { formik, isPending };
 };
 
 export default useLogin;

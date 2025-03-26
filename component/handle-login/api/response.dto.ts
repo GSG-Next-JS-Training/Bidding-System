@@ -1,5 +1,6 @@
+import { UserRoles } from "@/@types";
 
-  export interface LoginResponse {
-    authentication: string;
-    userType: string;
-  }
+export interface LoginResponse {
+  token: string;
+  userType: UserRoles;
+}

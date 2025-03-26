@@ -1,0 +1,18 @@
+import { UserRoles } from "@/@types";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+
+export const redirectByRole = (role: UserRoles, router: AppRouterInstance) => {
+  switch (role) {
+    case "bedding-company":
+      router.push("/dashboard/bedding-company");
+      break;
+    case "offer-company":
+      router.push("/dashboard/offer-company");
+      break;
+    case "admin":
+      router.push("/dashboard/admin");
+      break;
+    default:
+      router.push("/login");
+  }
+};
