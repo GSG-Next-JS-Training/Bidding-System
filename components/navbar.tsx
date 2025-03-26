@@ -1,18 +1,22 @@
-"use client"
-import { UserRoles } from "@/@types"
-import Link from "next/link"
-import { useMemo } from "react"
+"use client";
+import { UserRoles } from "@/@types";
+import Link from "next/link";
+import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 
 interface IUser {
-  name: string
-  role: UserRoles
+  name: string;
+  role: UserRoles;
 }
+
 interface ILink {
-  name: string
-  url: string
+  name: string;
+  url: string;
 }
 
 const Navbar = () => {
+  const pathname = usePathname();
+
   const USERS: IUser[] = [
     { name: "Palestine Biddings", role: "bedding-company" },
     { name: "Rads Offers", role: "offer-company" },
@@ -27,20 +31,20 @@ const Navbar = () => {
     switch (user.role) {
       case "admin":
         return [
-          { name: "Create Account", url: "create-account" },
-          { name: "New Biddings", url: "new-biddings" },
-          { name: "Users", url: "users" }
+          { name: "Create Account", url: "/create-account" },
+          { name: "New Biddings", url: "/new-biddings" },
+          { name: "Users", url: "/users" }
         ];
       case "bedding-company":
         return [
-          { name: "New Offers", url: "new-offers" },
-          { name: "My Biddings", url: "my-biddings" },
-          { name: "Add Bidding", url: "add-bidding" }
+          { name: "New Offers", url: "/new-offers" },
+          { name: "My Biddings", url: "/my-biddings" },
+          { name: "Add Bidding", url: "/add-bidding" }
         ];
       case "offer-company":
         return [
-          { name: "My Offers", url: "my-offers" },
-          { name: "New Biddings", url: "new-biddings" }
+          { name: "My Offers", url: "/my-offers" },
+          { name: "New Biddings", url: "/new-biddings" }
         ];
       default:
         return [];
@@ -49,18 +53,24 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 shadow-sm px-4 lg:px-20">
-      
      
+   
 
       <div className="flex-1">
         <Link href="/" className="text-xl btn-ghost text-primary font-bold">
           Tending <span className="text-accent">System</span>
         </Link>
       </div>
-
- <div className="lg:hidden">
+   <div className="lg:hidden">
         <label htmlFor="menu-drawer" className="btn btn-ghost lg:hidden">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
           </svg>
         </label>
@@ -68,11 +78,24 @@ const Navbar = () => {
      
       <div className="hidden lg:flex gap-9 items-center">
         {links.map((link, index) => (
-          <Link className="link-primary cursor-pointer" key={index} href={link.url}>
+          <Link
+            key={index}
+            href={link.url}
+            className={`relative text-primary cursor-pointer pb-1 ${
+              pathname === link.url ? "active-link" : "hover-link"
+            }`}
+          >
             {link.name}
           </Link>
         ))}
-        <Link className="link-primary cursor-pointer" href="/">Home</Link>
+        <Link
+          className={`relative text-primary cursor-pointer pb-1 ${
+            pathname === "/" ? "active-link" : "hover-link"
+          }`}
+          href="/"
+        >
+          Home
+        </Link>
         {user ? (
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost avatar">
@@ -89,7 +112,7 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Drawer Content */}
+ 
       <input type="checkbox" id="menu-drawer" className="drawer-toggle" />
       <div className="drawer-side">
         <label htmlFor="menu-drawer" className="drawer-overlay"></label>
@@ -111,6 +134,9 @@ const Navbar = () => {
           )}
         </ul>
       </div>
+
+      
+     
     </div>
   );
 };
