@@ -1,7 +1,7 @@
 'use client';
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const TABLE_HEADER: string[] = ['Company', 'Service', 'Discount', 'Location', 'Status', 'Action'];
 const offers = [
@@ -11,20 +11,20 @@ const offers = [
 ];
 
 const OfferTable = () => {
-    const params = useSearchParams();
+    const searchParams = useSearchParams();
     const router = useRouter();
     const [filters, setFilters] = useState({
-        location : params.get('location') || '',
-        serviceType : params.get('serviceType') || '',
-        discountRate : params.get('discountRate') || ''
+        location : searchParams.get("location") || "",
+        serviceType : searchParams.get("serviceType") || "",
+        discountRate : searchParams.get("discountRate") || ""
     });
     useEffect(() =>{
-        const urlParams = new URLSearchParams();
-        if(filters.location) urlParams.set('location', filters.location);
-        if(filters.serviceType) urlParams.set('serviceType', filters.serviceType)
-        if(filters.discountRate) urlParams.set('discountRate', filters.discountRate)
+        const params = new URLSearchParams();
+        if(filters.location) params.set("location", filters.location);
+        if(filters.serviceType) params.set("serviceType", filters.serviceType)
+        if(filters.discountRate) params.set("discountRate", filters.discountRate)
         
-        router.push(`?${urlParams.toString()}`,undefined, {scroll : false})
+        router.push(`?${params.toString()}`, {scroll : false})
     }, [filters, router]);
     const filteredOffers = offers.filter(offer =>
         (filters.location ? offer.location.toLowerCase().includes(filters.location.toLowerCase()) : true) &&

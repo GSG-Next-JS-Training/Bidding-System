@@ -1,6 +1,6 @@
+import {NextResponse } from "next/server";
 import { handlerWrapper } from "@/lib/apiHandler";
 import { fetchOffers } from "@/modules/services/biddingService";
-import {NextResponse } from "next/server";
 
 const fetchOfferHandler = async () =>{
     const offer = await fetchOffers();
