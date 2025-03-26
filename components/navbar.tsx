@@ -23,7 +23,7 @@ const Navbar = () => {
     { name: "Doe Admin", role: "admin" }
   ];
 
-  const user: IUser | false = USERS[0];
+  const user: IUser | false = USERS[2];
 
   const links: ILink[] = useMemo(() => {
     if (!user) return [];
@@ -81,7 +81,7 @@ const Navbar = () => {
           <Link
             key={index}
             href={link.url}
-            className={`relative text-primary cursor-pointer pb-1 ${
+            className={`relative font-extrabold text-primary cursor-pointer pb-1 ${
               pathname === link.url ? "active-link" : "hover-link"
             }`}
           >
@@ -89,7 +89,7 @@ const Navbar = () => {
           </Link>
         ))}
         <Link
-          className={`relative text-primary cursor-pointer pb-1 ${
+          className={`relative font-extrabold  text-primary cursor-pointer pb-1 ${
             pathname === "/" ? "active-link" : "hover-link"
           }`}
           href="/"
@@ -98,7 +98,7 @@ const Navbar = () => {
         </Link>
         {user ? (
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost avatar">
+            <div tabIndex={0} role="button" className="btn btn-ghost avatar font-extrabold text-primary">
               {user.name}
             </div>
             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
@@ -108,7 +108,7 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <Link href="/login" className="btn btn-primary">Login</Link>
+          <Link href="/login" className="btn font-bolder btn-primary">Login</Link>
         )}
       </div>
 
@@ -120,7 +120,7 @@ const Navbar = () => {
           <li><Link href="/">Home</Link></li>
           {links.map((link, index) => (
             <li key={index}>
-              <Link href={link.url}>{link.name}</Link>
+              <Link className="" href={link.url}>{link.name}</Link>
             </li>
           ))}
           {user ? (
