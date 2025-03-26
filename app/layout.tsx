@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope} from "next/font/google";
 import "./globals.css";
 import { connection } from "@/lib/mongodb";
+import Navbar from "@/components/navbar";
 
 
 
@@ -21,10 +22,11 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="biddingsystem">
+
       <body
-        className={`${manrope.className} antialiased bg-neutral h-screen flex items-center justify-center`}
+        className={`${manrope.className} antialiased bg-neutral h-screen w-full `}
       >
-       
+       <Navbar/>
         {children}
       </body>
     </html>
