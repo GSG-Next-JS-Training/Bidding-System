@@ -1,18 +1,31 @@
 'use client';
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-const INITIAL_VALUES = { location: "", serviceType: "", discountRate: "" };
 const TABLE_HEADER: string[] = ['Company', 'Service', 'Discount', 'Location', 'Status', 'Action'];
+const offers = [
+    { id: 1, company: "Tech Solutions", service: "Web Development", discount: "10%", location: "Hebron", status: "Active" },
+    { id: 2, company: "Data Corp", service: "Cloud Hosting", discount: "15%", location: "Bethlehem", status: "Active" },
+    { id: 3, company: "DesignX", service: "UI/UX Design", discount: "12%", location: "Rawabi", status: "Expired" },
+];
 
 const OfferTable = () => {
-    const [filters, setFilters] = useState(INITIAL_VALUES);
-
-    const offers = [
-        { id: 1, company: "Tech Solutions", service: "Web Development", discount: "10%", location: "Hebron", status: "Active" },
-        { id: 2, company: "Data Corp", service: "Cloud Hosting", discount: "15%", location: "Bethlehem", status: "Active" },
-        { id: 3, company: "DesignX", service: "UI/UX Design", discount: "12%", location: "Rawabi", status: "Expired" },
-    ];
-
+    const params = useSearchParams();
+    const router = useRouter();
+    const [filters, setFilters] = useState({
+        location : params.get('location') || '',
+        serviceType : params.get('serviceType') || '',
+        discountRate : params.get('discountRate') || ''
+    });
+    useEffect(() =>{
+        const urlParams = new URLSearchParams();
+        if(filters.location) urlParams.set('location', filters.location);
+        if(filters.serviceType) urlParams.set('serviceType', filters.serviceType)
+        if(filters.discountRate) urlParams.set('discountRate', filters.discountRate)
+        
+        router.push(`?${urlParams.toString()}`,undefined, {scroll : false})
+    }, [filters, router]);
     const filteredOffers = offers.filter(offer =>
         (filters.location ? offer.location.toLowerCase().includes(filters.location.toLowerCase()) : true) &&
         (filters.serviceType ? offer.service.toLowerCase().includes(filters.serviceType.toLowerCase()) : true) &&
