@@ -68,7 +68,7 @@ return (
                             </td>
                             <td className="border border-gray-300 px-4 py-2">
                                 <button
-                                className="bg-blue-500 cursor-pointer text-white px-4 py-1 rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                                className={offer.status == "Active" ?  "bg-blue-500 cursor-pointer text-white px-4 py-1 rounded-lg hover:bg-blue-600 disabled:opacity-50" : "bg-blue-500 cursor-not-allowed text-white px-4 py-1 rounded-lg hover:bg-blue-600 disabled:opacity-50"}
                                 disabled={offer.status !== "Active"}
                                 >
                                     Place Bid
