@@ -5,18 +5,18 @@ const INITIAL_VALUES = { location : "", serviceType : "",discountRate : "" };
 const TABLE_HEADER : string[] = ['Company', 'Service', 'Discount', 'Location', 'Status', 'Action'];
 
 const OfferTable = () => {
-const [filters, setFilters] = useState(INITIAL_VALUES);
+    const [filters, setFilters] = useState(INITIAL_VALUES);
 
-const offers = [
-    { id: 1, company: "Tech Solutions", service: "Web Development", discount: "10%", location: "Hebron", status: "Active" },
-    { id: 2, company: "Data Corp", service: "Cloud Hosting", discount: "15%", location: "Bethlehem", status: "Active" },
-    { id: 3, company: "DesignX", service: "UI/UX Design", discount: "12%", location: "Rawabi", status: "Expired" },
+    const offers = [
+        { id: 1, company: "Tech Solutions", service: "Web Development", discount: "10%", location: "Hebron", status: "Active" },
+        { id: 2, company: "Data Corp", service: "Cloud Hosting", discount: "15%", location: "Bethlehem", status: "Active" },
+        { id: 3, company: "DesignX", service: "UI/UX Design", discount: "12%", location: "Rawabi", status: "Expired" },
   ];
 
-const filteredOffers = offers.filter(offer => 
-    (filters.location ? offer.location.includes(filters.location) : true) &&
-    (filters.serviceType ? offer.service.includes(filters.serviceType) : true) &&
-    (filters.discountRate ? offer.discount.includes(filters.discountRate) : true)
+    const filteredOffers = offers.filter(offer => 
+        (filters.location ? offer.location.toLowerCase().includes(filters.location.toLowerCase()) : true) &&
+        (filters.serviceType ? offer.service.toLowerCase().includes(filters.serviceType.toLowerCase()) : true) &&
+        (filters.discountRate ? offer.discount.toLowerCase().includes(filters.discountRate.toLowerCase()) : true)
 );
 
 return (
