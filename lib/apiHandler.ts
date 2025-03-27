@@ -1,5 +1,4 @@
 // utils/handlerWrapper.ts
-
 import { NextRequest, NextResponse } from "next/server";
 
 type Handler = (req: NextRequest, res: NextResponse) => Promise<any>;

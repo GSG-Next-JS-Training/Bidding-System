@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Manrope} from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { connection } from "@/lib/mongodb";
+import ReduxProvider from "@/providers/reduxProvider";
+import Snackbar from "@/component/snackbar/snackbar";
 import Navbar from "@/components/navbar";
-
-
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
@@ -26,8 +26,12 @@ export default function RootLayout({
       <body
         className={`${manrope.className} antialiased min-h-screen w-full `}
       >
-       <Navbar/>
-        {children}
+        <ReduxProvider>  
+           <Navbar/>
+          <Snackbar />
+          {children}
+        </ReduxProvider>
+    
       </body>
     </html>
   );
