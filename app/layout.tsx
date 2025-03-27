@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="biddingsystem">
       <body
-        className={`${manrope.className} antialiased bg-neutral h-screen flex items-center justify-center`}
+        className={`${manrope.className} antialiased bg-neutral  min-h-screen flex items-start justify-center`}
       >
         <ReduxProvider>
           <Snackbar />
