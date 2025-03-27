@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { connection } from "@/lib/mongodb";
+import ReduxProvider from "@/providers/reduxProvider";
+import Snackbar from "@/component/snackbar/snackbar";
+import Navbar from "@/components/navbar";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,11 +21,17 @@ export default function RootLayout({
   connection();
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="biddingsystem">
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${manrope.className} antialiased bg-neutral h-screen w-full `}
       >
-        {children}
+        <ReduxProvider>  
+           <Navbar/>
+          <Snackbar />
+          {children}
+        </ReduxProvider>
+    
       </body>
     </html>
   );
