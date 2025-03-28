@@ -4,7 +4,7 @@ import "./globals.css";
 import { connection } from "@/lib/mongodb";
 import ReduxProvider from "@/providers/reduxProvider";
 import Snackbar from "@/component/snackbar/snackbar";
-import Navbar from "@/components/navbar";
+import Navbar from "@/component/navbar/navbar";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
