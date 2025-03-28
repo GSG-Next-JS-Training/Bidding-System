@@ -12,7 +12,7 @@ const Snackbar: FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => dispatch(hideSnackbar()), duration);
     return () => clearTimeout(timer);
-  }, [duration]);
+  }, [open, duration, dispatch]);
 
   if (!open) return null;
 

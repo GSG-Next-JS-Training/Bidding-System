@@ -5,7 +5,7 @@ import BiddingTextField from "../bidding-text-field";
 import useLogin from "./hooks/useLogin";
 
 const HandleLogin = () => {
-  const { formik } = useLogin();
+  const { formik, isPending } = useLogin();
 
   return (
     <div>
@@ -26,10 +26,8 @@ const HandleLogin = () => {
                 </label>
                 <BiddingTextField
                   id="email"
-                  type="email"
                   placeholder="your Email"
                   name="email"
-                  required
                   className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
                 />
               </div>
@@ -57,7 +55,9 @@ const HandleLogin = () => {
                 </Link>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer"
+                  className={`px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer ${
+                    isPending ? "cursor-not-allowed" : ""
+                  }`}
                 >
                   login
                 </button>
