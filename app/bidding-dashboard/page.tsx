@@ -1,5 +1,5 @@
 import React from 'react'
-import OfferTable from '@/component/offer-table/OfferTable'
+import OfferTable from '@/components/offer-table/OfferTable'
 
 const page = () => {
   return (

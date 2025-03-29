@@ -3,8 +3,8 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { connection } from "@/lib/mongodb";
 import ReduxProvider from "@/providers/reduxProvider";
-import Snackbar from "@/component/snackbar/snackbar";
-import Navbar from "@/component/navbar/navbar";
+import Snackbar from "@/components/snackbar/snackbar";
+import Navbar from "@/components/navbar/navbar";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
