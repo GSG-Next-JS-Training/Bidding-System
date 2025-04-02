@@ -1,6 +1,7 @@
 "use client";
 import { Form, FormikProvider } from "formik";
 import useForm from "./hooks/useForm";
+import BiddingTextField from "../handle-login/bidding-text-field";
 
 const dummyCompanies = [
   { id: "1", companyName: "Tech Solutions Ltd." },
@@ -32,39 +33,26 @@ const AddBiddingForm = () => {
             </option>
           ))}
         </select>
-        {formik.touched.biddingCompanyId && formik.errors.biddingCompanyId && (
-          <p className="text-red-500 text-sm">{formik.errors.biddingCompanyId}</p>
-        )}
       </div>
 
       <div className="mb-4">
         <label className="block text-gray-600">Bid Amount</label>
-        <input
+        <BiddingTextField
           type="number"
           name="bidAmount"
-          onChange={formik.handleChange}
-          value={formik.values.bidAmount}
           className="w-full p-2 border border-gray-300 rounded-lg"
           placeholder="Enter bid amount"
         />
-        {formik.touched.bidAmount && formik.errors.bidAmount && (
-          <p className="text-red-500 text-sm">{formik.errors.bidAmount}</p>
-        )}
       </div>
 
       <div className="mb-4">
         <label className="block text-gray-600">Service Offered</label>
-        <input
+        <BiddingTextField
           type="text"
           name="serviceOffered"
-          onChange={formik.handleChange}
-          value={formik.values.serviceOffered}
           className="w-full p-2 border border-gray-300 rounded-lg"
           placeholder="Describe the service"
         />
-        {formik.touched.serviceOffered && formik.errors.serviceOffered && (
-          <p className="text-red-500 text-sm">{formik.errors.serviceOffered}</p>
-        )}
       </div>
 
       <div className="mb-4">
@@ -79,9 +67,6 @@ const AddBiddingForm = () => {
           <option value="won">Won</option>
           <option value="lost">Lost</option>
         </select>
-        {formik.touched.bidStatus && formik.errors.bidStatus && (
-          <p className="text-red-500 text-sm">{formik.errors.bidStatus}</p>
-        )}
       </div>
       <button
         type="submit"

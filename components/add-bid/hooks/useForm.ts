@@ -6,13 +6,12 @@ import { validationSchema } from "../validationSchema";
 import { FormValues } from "../types";
 import { INITIAL_VALUES } from "../constant";
 import { addBidding } from "../api";
-import { AddBiddingRequestBody } from "../api/request.dto";
 
 const useForm = () => {
   const { displaySnackbar } = useSnackbar();
 
   const { mutate: submitBid, isPending } = useMutation({
-    mutationFn: (values : AddBiddingRequestBody) => addBidding(values),
+    mutationFn: addBidding,
     onSuccess: () => {
       displaySnackbar({ type: "success", message: "Bid submitted successfully" });
     },
@@ -25,9 +24,7 @@ const useForm = () => {
     initialValues: INITIAL_VALUES,
     validationSchema,
     onSubmit: (values) => {
-        console.log("Submitted Bid:", values);
         submitBid(values);
-        alert("Bid submitted successfully!");
     },
   });
 
