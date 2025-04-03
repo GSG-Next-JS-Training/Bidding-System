@@ -16,15 +16,14 @@ const AddBiddingForm = () => {
     <FormikProvider value={formik}>
     <Form
       onSubmit={formik.handleSubmit}
-      className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg"
     >
       <div className="mb-4">
-        <label className="block text-gray-600">Bidding Company</label>
+        <label className="block text-primary">Bidding Company</label>
         <select
           name="biddingCompanyId"
           onChange={formik.handleChange}
           value={formik.values.biddingCompanyId}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-neutral "
         >
           <option value="">Select a company</option>
           {dummyCompanies.map((company) => (
@@ -36,32 +35,32 @@ const AddBiddingForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-600">Bid Amount</label>
+        <label className="block text-primary">Bid Amount</label>
         <BiddingTextField
           type="number"
           name="bidAmount"
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-neutral"
           placeholder="Enter bid amount"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-600">Service Offered</label>
+        <label className="block text-primary">Service Offered</label>
         <BiddingTextField
           type="text"
           name="serviceOffered"
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-neutral"
           placeholder="Describe the service"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-600">Bid Status</label>
+        <label className="block text-primary">Bid Status</label>
         <select
           name="bidStatus"
           onChange={formik.handleChange}
           value={formik.values.bidStatus}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-2 border border-gray-300 rounded-lg bg-neutral"
         >
           <option value="pending">Pending</option>
           <option value="won">Won</option>
@@ -71,7 +70,7 @@ const AddBiddingForm = () => {
       <button
         type="submit"
         disabled={isPending}
-        className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 cursor-pointer"
+        className="w-full text-white py-2 rounded-lg hover:bg-secondary cursor-pointer btn btn-primary"
       >
         {isPending ? "Submitting..." : "Submit Bid"}
       </button>
