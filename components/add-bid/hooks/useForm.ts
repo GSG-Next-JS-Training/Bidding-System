@@ -1,11 +1,11 @@
 "use client";
 import { useFormik } from "formik";
-import { useMutation } from "@tanstack/react-query";
-import useSnackbar from "@/hooks/useSnackbar";
-import { validationSchema } from "../validationSchema";
-import { FormValues } from "../types";
-import { INITIAL_VALUES } from "../constant";
 import { addBidding } from "../api";
+import { INITIAL_VALUES } from "../constant";
+import { useMutation } from "@tanstack/react-query";
+import { validationSchema } from "../validationSchema";
+import { AddBiddingRequestBody } from "../api/request.dto";
+import useSnackbar from "@/hooks/useSnackbar";
 
 const useForm = () => {
   const { displaySnackbar } = useSnackbar();
@@ -20,7 +20,7 @@ const useForm = () => {
     },
   });
 
-  const formik = useFormik<FormValues>({
+  const formik = useFormik<AddBiddingRequestBody>({
     initialValues: INITIAL_VALUES,
     validationSchema,
     onSubmit: (values) => {
