@@ -1,10 +1,9 @@
 import "dotenv/config";
-import * as jose from 'jose';
+import * as jose from "jose";
 import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import { customAlphabet } from "nanoid";
 import { IUser } from "@/database/user-model";
-import { getEmailHtml } from "@/lib/emailMessage";
 
 const JOSE_SIGNATURE = process.env.JOSE_SIGNATURE || "";
 const SENDER_EMAIL = process.env.SENDER_EMAIL || "";
@@ -12,17 +11,24 @@ const SENDER_PASSWORD = process.env.SENDER_PASSWORD || "";
 
 export const generateToken = async (user: IUser) => {
   const token = await new jose.SignJWT({ email: user.email, role: user.role })
-  .setProtectedHeader({ alg: 'HS256' })
-  .setExpirationTime('1w')
-  .sign(new TextEncoder().encode(JOSE_SIGNATURE));
+    .setProtectedHeader({ alg: "HS256" })
+    .setExpirationTime("1w")
+    .sign(new TextEncoder().encode(JOSE_SIGNATURE));
   return token;
 };
 
-export const isValidPassword = async (password: string, hashedPassword: string) => {
+export const isValidPassword = async (
+  password: string,
+  hashedPassword: string
+) => {
   return bcrypt.compare(password, hashedPassword);
 };
 
-export const sendEmail = async (to: string, subject: string, html: string) => {
+export const sendEmail = async (
+  to: string,
+  subject: string,
+  message: string
+) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     auth: {
@@ -32,22 +38,31 @@ export const sendEmail = async (to: string, subject: string, html: string) => {
     port: 587,
     secure: false,
   });
-  
-
-  ;
 
   await transporter.sendMail({
-    from: `"Bidding System" <${process.env.SENDER_EMAIL}>`, // sender address
+    from: `"Bidding System" <${process.env.SENDER_EMAIL}>`,
     to,
     subject,
-    html : getEmailHtml(html),
+    html: message,
   });
 };
 
-export const generateCode = () =>{
+export const generateCode = () => {
   return customAlphabet("1234567890", 4)();
-} 
+};
 
-export const hashPassword = async (password : string) =>{
+export const hashPassword = async (password: string) => {
   return bcrypt.hash(password, Number(process.env.SALT_ROUND));
-}
+};
+
+export const verifyToken = async (token: string) => {
+  const secret = new TextEncoder().encode(process.env.JOSE_SIGNATURE);
+
+  try {
+    const { payload } = await jose.jwtVerify(token, secret);
+    return payload;
+  } catch (error) {
+    console.error("Token verification failed:", error);
+    throw new Error("Invalid or expired token");
+  }
+};
