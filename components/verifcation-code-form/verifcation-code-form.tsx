@@ -18,11 +18,10 @@ const VerficationCodeForm: React.FC = () => {
             <Image src={key} alt="key" height={50} width={50} />
           </div>
           <h1 className="text-3xl font-bold text-primary mt-4">
-           Verfication code
+            Verfication code
           </h1>
           <p className="text-gray-600">
-           submit Verfication your code here to keep on
-
+            submit Verfication your code here to keep on
           </p>
           <div className="w-full mt-4">
             <BiddingTextField

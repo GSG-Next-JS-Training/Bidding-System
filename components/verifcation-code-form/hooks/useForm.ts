@@ -10,15 +10,19 @@ import { useRouter } from "next/navigation";
 
 const useForm = () => {
   const router = useRouter();
-  
 
   const { displaySnackbar } = useSnackbar();
 
   const { mutate, isPending } = useMutation({
     mutationFn: checkVerficationCode,
     onSuccess: () => {
-      displaySnackbar({message:"password reset succefully ", type: "success"});
-      setTimeout(()=>{router?.push("/reset-password")},3000)
+      displaySnackbar({
+        message: "password reset succefully ",
+        type: "success",
+      });
+      setTimeout(() => {
+        router?.push("/reset-password");
+      }, 3000);
     },
     onError: () => {
       displaySnackbar({

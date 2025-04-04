@@ -1,10 +1,7 @@
-import VerficationCodeForm from "@/components/verifcation-code-form"
-
+import VerficationCodeForm from "@/components/verifcation-code-form";
 
 const page = () => {
-  return (
-   <VerficationCodeForm/>
-  )
-}
+  return <VerficationCodeForm />;
+};
 
-export default page
+export default page;

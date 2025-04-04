@@ -7,16 +7,20 @@ import { ForgotPasswordValues } from "../types";
 import { INITIAL_VALUES } from "@/component/handle-login/constant";
 import { sendResetLink } from "../api";
 import { useRouter } from "next/router";
+import { setCookie } from "@/utils/cookies";
 
 const useForm = () => {
   const { displaySnackbar } = useSnackbar();
+  const router = useRouter();
 
   const { mutate, isPending } = useMutation({
     mutationFn: sendResetLink,
-    onSuccess: () => {
-     const router = useRouter() ;
-     displaySnackbar({message:"Password code sent ", type: "success"});
-      setTimeout(()=>{router?.push("/verification-code")},3000)
+    onSuccess: (data) => {
+      displaySnackbar({ message: "Password code sent ", type: "success" });
+      setCookie("resetEmail", data.email);
+      setTimeout(() => {
+        router?.push("/verification-code");
+      }, 3000);
     },
     onError: () => {
       displaySnackbar({
