@@ -1,10 +1,7 @@
-import Dashboard from "@/components/bidding/dashboard-offer";
+import Dashboard from "@/components/bidding";
 
 const Bidding = () => {
-
-    return (
-        <Dashboard />
-    );
+  return <Dashboard />;
 };
 
 export default Bidding;
