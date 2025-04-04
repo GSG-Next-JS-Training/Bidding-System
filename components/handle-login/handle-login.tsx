@@ -1,7 +1,7 @@
 "use client";
 import { Form, FormikProvider } from "formik";
 import Link from "next/link";
-import BiddingTextField from "./bidding-text-field";
+import BiddingTextField from "../bidding-text-field";
 import useLogin from "./hooks/useLogin";
 
 const HandleLogin = () => {
