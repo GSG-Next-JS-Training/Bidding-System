@@ -3,34 +3,36 @@ import { useFormik } from "formik";
 import { validationSchema } from "../validationSchema";
 import useSnackbar from "@/hooks/useSnackbar";
 import { useMutation } from "@tanstack/react-query";
-import { ForgotPasswordValues } from "../types";
-import { INITIAL_VALUES } from "@/component/handle-login/constant";
-import { sendResetLink } from "../api";
-import { useRouter } from "next/router";
-import { setCookie } from "@/utils/cookies";
+import { VerifcationCodeValues } from "../types";
+import { INITIAL_VALUES } from "../constants";
+import { checkVerficationCode } from "../api";
+import { useRouter } from "next/navigation";
 
 const useForm = () => {
-  const { displaySnackbar } = useSnackbar();
   const router = useRouter();
 
+  const { displaySnackbar } = useSnackbar();
+
   const { mutate, isPending } = useMutation({
-    mutationFn: sendResetLink,
-    onSuccess: (data) => {
-      displaySnackbar({ message: "Password code sent ", type: "success" });
-      setCookie("resetEmail", data.email);
+    mutationFn: checkVerficationCode,
+    onSuccess: () => {
+      displaySnackbar({
+        message: "password reset succefully ",
+        type: "success",
+      });
       setTimeout(() => {
-        router?.push("/verification-code");
+        router?.push("/reset-password");
       }, 3000);
     },
     onError: () => {
       displaySnackbar({
         type: "error",
-        message: "an error occer",
+        message: "an error occurred",
       });
     },
   });
 
-  const formik = useFormik<ForgotPasswordValues>({
+  const formik = useFormik<VerifcationCodeValues>({
     initialValues: INITIAL_VALUES,
     onSubmit: (values) => {
       mutate(values);
