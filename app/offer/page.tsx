@@ -1,10 +1,6 @@
-import HandleOffer from "@/components/handle-offer/handle-offer";
+import HandleOffer from "@/components/handle-offer";
 
 const Offer = () => {
-  return (
-  <div>
-   <HandleOffer/>
-  </div>
-  );
+  return <HandleOffer />;
 };
 export default Offer;

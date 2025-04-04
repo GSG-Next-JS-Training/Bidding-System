@@ -3,6 +3,39 @@ import { Form, FormikProvider } from "formik";
 import offerFormik from "./hooks/useForm";
 import BiddingTextField from "@/component/bidding-text-field";
 
+const formFields = [
+  {
+    id: "name",
+    label: "Company Name:",
+    placeholder: "Company Name",
+    name: "name",
+  },
+  {
+    id: "number",
+    label: "Number:",
+    placeholder: "your number",
+    name: "number",
+  },
+  {
+    id: "location",
+    label: "Location:",
+    placeholder: "location",
+    name: "location",
+  },
+  {
+    id: "Discount",
+    label: "Discount:",
+    placeholder: "Discount",
+    name: "discount",
+  },
+  {
+    id: "Service provide",
+    label: "Service provide:",
+    placeholder: "Service provide",
+    name: "service",
+  },
+];
+
 const HandleOffer = () => {
   const { formik } = offerFormik();
 
@@ -14,64 +47,20 @@ const HandleOffer = () => {
         </h1>
         <FormikProvider value={formik}>
           <Form className="space-y-4">
-            <div>
-              <label htmlFor="name" className="text-primary font-semibold">
-                Company Name:
-              </label>
-              <BiddingTextField
-                id="name"
-                placeholder="Company Name"
-                name="name"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label htmlFor="number" className="text-primary font-semibold">
-                Number:
-              </label>
-              <BiddingTextField
-                id="number"
-                placeholder="your number"
-                name="number"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label htmlFor="location" className="text-primary font-semibold">
-                Location:
-              </label>
-              <BiddingTextField
-                id="location"
-                placeholder="location"
-                name="location"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label htmlFor="Discount" className="text-primary font-semibold">
-                Discount:
-              </label>
-              <BiddingTextField
-                id="Discount"
-                placeholder="Discount"
-                name="discount"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="Service provide"
-                className="text-primary font-semibold"
-              >
-                Service provide:
-              </label>
-              <BiddingTextField
-                id="Service provide"
-                placeholder="Service provide"
-                name="service"
-                className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
-              />
-            </div>
+            {formFields.map(({ id, label, placeholder, name }) => (
+              <div key={id}>
+                <label htmlFor={id} className="text-primary font-semibold">
+                  {label}
+                </label>
+                <BiddingTextField
+                  id={id}
+                  placeholder={placeholder}
+                  name={name}
+                  className="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:ring-2  focus:ring-blue-400 focus:outline-none"
+                />
+              </div>
+            ))}
+
             <div>
               <label htmlFor="Owner" className="text-primary font-semibold">
                 Company Owner

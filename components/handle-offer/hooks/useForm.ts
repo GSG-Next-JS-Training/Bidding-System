@@ -3,10 +3,11 @@ import { useFormik } from "formik";
 import { FormValues } from "../type";
 import { INITIAL_FORM } from "../constant";
 import { validationSchema } from "../validationSchema";
-const offerFormik = () => {
+
+const OfferFormik = () => {
   const formik = useFormik<FormValues>({
     initialValues: INITIAL_FORM,
-    validationSchema:validationSchema  ,
+    validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log("Submitted values:", values);
     },
@@ -14,4 +15,4 @@ const offerFormik = () => {
 
   return { formik };
 };
-export default offerFormik;
+export default OfferFormik;
