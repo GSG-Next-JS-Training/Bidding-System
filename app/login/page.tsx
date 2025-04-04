@@ -1,4 +1,4 @@
-import HandleLogin from "@/component/handle-login/handle-login";
+import HandleLogin from "@/components/handle-login/handle-login";
 
 const Login = () => {
   return <HandleLogin />;
