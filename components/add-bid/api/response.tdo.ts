@@ -1,5 +1,4 @@
-export interface AddBiddingResponse {
-    success: boolean;
-    message: string;
+import {BaseResponse} from '@/@types'
+export interface AddBiddingResponse extends BaseResponse{
     bidId: string;
   }  
