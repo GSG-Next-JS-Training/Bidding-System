@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en" data-theme="biddingsystem">
 
       <body
-        className={`${manrope.className} antialiased min-h-screen w-full `}
+        className={`${manrope.className} antialiased min-h-screen w-full `} 
       >
         <ReduxProvider>  
            <Navbar/>
