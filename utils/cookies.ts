@@ -7,3 +7,7 @@ export const getCookie = (name: string) => {
 export const setCookie = (name: string, value: string) => {
   document.cookie = `${name}=${value}; Secure; HttpOnly; Path=/;`;
 };
+
+export const removeCookie = (name: string) => {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+};
