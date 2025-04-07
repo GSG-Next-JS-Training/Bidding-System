@@ -1,5 +1,6 @@
 import { IOffer } from "@/database/offer-model";
-import { createOffer, fetchOffers } from "../services/offerService";
+import { createOffer, fetchOffers, findOfferById } from "../services/offerService";
+import { Types } from "mongoose";
 
 export const addOffer = async (body : IOffer) => {
     const { offersCompanyId, offerDiscount, serviceOffered, offerStatus } = body;
@@ -17,3 +18,8 @@ export const getOffers = async () =>{
     if(!offer) throw new Error("No offers found");
     return offer;
 }
+
+export const getOfferById = async (userId: Types.ObjectId) => {
+    const bid = await findOfferById(userId);
+    return bid
+  }
