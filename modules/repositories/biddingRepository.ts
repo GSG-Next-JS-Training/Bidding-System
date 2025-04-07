@@ -1,5 +1,5 @@
 import { IBid } from "@/database/bid-model";
-import { createBid } from "../services/biddingService";
+import { createBid, fetchBids } from "../services/biddingService";
 
 export const addBidding = async (body: IBid) => {
   const { biddingCompanyId, bidAmount, serviceOffered, bidStatus } = body;
@@ -11,3 +11,9 @@ export const addBidding = async (body: IBid) => {
   );
   return newBid;
 };
+
+export const getBids = async () => {
+  const bids = await fetchBids();
+  if(!bids) throw new Error("No bids found");
+  return bids;
+}

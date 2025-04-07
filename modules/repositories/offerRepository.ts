@@ -1,5 +1,5 @@
 import { IOffer } from "@/database/offer-model";
-import { createOffer } from "../services/offerService";
+import { createOffer, fetchOffers } from "../services/offerService";
 
 export const addOffer = async (body : IOffer) => {
     const { offersCompanyId, offerDiscount, serviceOffered, offerStatus } = body;
@@ -11,3 +11,9 @@ export const addOffer = async (body : IOffer) => {
     );
     return newOffer;
     }
+
+export const getOffers = async () =>{
+    const offer = await fetchOffers();
+    if(!offer) throw new Error("No offers found");
+    return offer;
+}

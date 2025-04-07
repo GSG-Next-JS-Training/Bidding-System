@@ -8,5 +8,10 @@ export const createOffer = async (offersCompanyId : Types.ObjectId, offerDiscoun
         serviceOffered,
         offerStatus
     });
-    return newOffer
+    return newOffer;
+}
+
+export const fetchOffers = async () =>{
+    const offer = await OfferModel.find({}).select('offerDiscount serviceOffered offerStatus');
+    return offer;
 }
