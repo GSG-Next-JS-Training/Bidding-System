@@ -1,13 +1,13 @@
-import mongoose from "mongoose";
+import { model, models, Schema, Types } from "mongoose";
 
 export interface IChat extends Document {
     chatName: string;
     isGroup: boolean;
-    users: mongoose.Schema.Types.ObjectId[];
-    latestMessage: mongoose.Schema.Types.ObjectId;
-    groupAdmin: mongoose.Schema.Types.ObjectId;
+    users: Types.ObjectId[];
+    latestMessage: Schema.Types.ObjectId;
+    groupAdmin: Schema.Types.ObjectId;
 }
-export const chatSchema = new mongoose.Schema(
+export const chatSchema = new Schema<IChat>(
   {
     chatName: {
       type: String,
@@ -19,20 +19,20 @@ export const chatSchema = new mongoose.Schema(
     },
     users: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Types.ObjectId,
         ref: "user",
       },
     ],
     latestMessage: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: "message",
     },
     groupAdmin: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Types.ObjectId,
       ref: "user",
     },
   },
   { timestamps: true }
 );
 
-export const ChatModel = mongoose.models.chat ?? mongoose.model<IChat>('chat', chatSchema);
+export const ChatModel = models.chat ?? model<IChat>('chat', chatSchema);
