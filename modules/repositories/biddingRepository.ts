@@ -1,9 +1,9 @@
+import { IBid } from "@/database/bid-model";
 import { createBid } from "../services/biddingService";
-import { AddBiddingRequestBody } from "@/components/add-bid/api/request.dto";
 
-export const addBidding = async (body: AddBiddingRequestBody) => {
+export const addBidding = async (body: IBid) => {
   const { biddingCompanyId, bidAmount, serviceOffered, bidStatus } = body;
-  const newBid = createBid(
+  const newBid = await createBid(
     biddingCompanyId,
     bidAmount,
     serviceOffered,

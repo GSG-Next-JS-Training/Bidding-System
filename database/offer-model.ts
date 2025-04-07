@@ -27,4 +27,4 @@ const offerSchema = new Schema<IOffer>(
   { timestamps: true }
 );
 
-export const OfferModel = models.offer ?? model<IOffer>("Offer", offerSchema);
+export const OfferModel = models.Offer ?? model<IOffer>("Offer", offerSchema);
