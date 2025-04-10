@@ -1,3 +1,4 @@
+import { removeCookie } from "@/utils/cookies";
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface initialStateType {
@@ -21,6 +22,7 @@ export const authSlice = createSlice({
       state.userType = action.payload.userType;
     },
     logOut: (state) => {
+      removeCookie("authToken");
       state.token = "";
       state.userType = "";
     },

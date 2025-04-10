@@ -7,6 +7,8 @@ import {
 } from "@/utils/auth";
 import { createUser, updateConfirmEmailRecord } from "../services/userServices";
 import { getConfirmEmailMessage } from "@/lib/emailMessage";
+import { getCompanyByUserId } from "../services/biddingCompanyServices";
+import { fetchCompanyByUserId } from "../services/offerCompanyServices";
 
 export const addUser = async (
   body: IUser,
@@ -40,4 +42,10 @@ export const confirmEmail = async (token: string) => {
   if (!decode) throw new Error("Invalid token");
   const user = updateConfirmEmailRecord(decode.email);
   return user;
+};
+
+export const getCompaniesByUserId = async (userId: string) => {
+  const biddingCompanies = await getCompanyByUserId(userId);
+  const offerCompanies = await fetchCompanyByUserId(userId);
+  return { biddingCompanies, offerCompanies };
 };
