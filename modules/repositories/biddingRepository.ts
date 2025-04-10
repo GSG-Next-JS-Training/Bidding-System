@@ -1,9 +1,10 @@
-import { createBid } from "../services/biddingService";
-import { AddBiddingRequestBody } from "@/components/add-bid/api/request.dto";
+import { IBid } from "@/database/bid-model";
+import { createBid, fetchBids, findBidById } from "../services/biddingService";
+import { Types } from "mongoose";
 
-export const addBidding = async (body: AddBiddingRequestBody) => {
+export const addBidding = async (body: IBid) => {
   const { biddingCompanyId, bidAmount, serviceOffered, bidStatus } = body;
-  const newBid = createBid(
+  const newBid = await createBid(
     biddingCompanyId,
     bidAmount,
     serviceOffered,
@@ -11,3 +12,14 @@ export const addBidding = async (body: AddBiddingRequestBody) => {
   );
   return newBid;
 };
+
+export const getBids = async () => {
+  const bids = await fetchBids();
+  if(!bids) throw new Error("No bids found");
+  return bids;
+}
+
+export const getBidById = async (userId: Types.ObjectId) => {
+  const bid = await findBidById(userId);
+  return bid
+}
