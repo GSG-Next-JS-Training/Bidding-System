@@ -123,7 +123,7 @@ const Navbar = () => {
       </div>
 
       <input type="checkbox" id="menu-drawer" className="drawer-toggle" />
-      <div className="drawer-side">
+      <div className="drawer-side z-50">
         <label htmlFor="menu-drawer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200">
           <li>
