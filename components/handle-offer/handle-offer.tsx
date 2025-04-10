@@ -1,7 +1,7 @@
 "use client";
 import { Form, FormikProvider } from "formik";
 import offerFormik from "./hooks/useForm";
-import BiddingTextField from "@/component/bidding-text-field";
+import BiddingTextField from "../bidding-text-field";
 
 const formFields = [
   {

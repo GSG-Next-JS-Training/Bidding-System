@@ -4,10 +4,10 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 export const redirectByRole = (role: UserRoles, router: AppRouterInstance) => {
   switch (role) {
     case "bedding-company":
-      router.push("/dashboard/bedding-company");
+      router.push("/bidding-dashboard");
       break;
     case "offer-company":
-      router.push("/dashboard/offer-company");
+      router.push("/offer-dashboard");
       break;
     case "admin":
       router.push("/dashboard/admin");

@@ -1,7 +1,7 @@
 "use client";
 import { Form, FormikProvider } from "formik";
 import useForm from "./hooks/useForm";
-import BiddingTextField from "../handle-login/bidding-text-field";
+import BiddingTextField from "../bidding-text-field";
 
 const dummyCompanies = [
   { id: "1", companyName: "Tech Solutions Ltd." },
