@@ -13,7 +13,10 @@ const loginHandler = async (req: NextRequest) => {
     secure: process.env.NODE_ENV === "production",
     maxAge: 86400,
   });
-  return NextResponse.json({ token, userType: user.role }, { status: 200 });
+  return NextResponse.json(
+    { token, userType: user.role, userId: user._id, userName: user.fullName },
+    { status: 200 }
+  );
 };
 
 export const POST = handlerWrapper(loginHandler);

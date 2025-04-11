@@ -1,5 +1,7 @@
-import { IOffersCompany, OffersCompanyModel } from "@/database/offers-company-model";
-
+import {
+  IOffersCompany,
+  OffersCompanyModel,
+} from "@/database/offers-company-model";
 
 export const fetchCompanyByUserId = async (userId: string) => {
   const offerCompany = await OffersCompanyModel.find({ userId }).select(
@@ -10,5 +12,10 @@ export const fetchCompanyByUserId = async (userId: string) => {
 
 export const createCompany = async (body: Partial<IOffersCompany>) => {
   const newCompany = await OffersCompanyModel.create(body);
-  return newCompany; 
+  return newCompany;
+};
+
+export const fetchCompanies = async () => {
+  const companies = await OffersCompanyModel.find({});
+  return companies;
 };

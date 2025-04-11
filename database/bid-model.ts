@@ -4,8 +4,9 @@ import { Schema, model, Document, Types, models } from "mongoose";
 export interface IBid extends Document {
   biddingCompanyId: Types.ObjectId;
   bidAmount: number;
-  serviceOffered: string;
+  description: string;
   bidStatus: BiddingStatus;
+  title: string;
 }
 
 const bidSchema = new Schema<IBid>(
@@ -15,12 +16,12 @@ const bidSchema = new Schema<IBid>(
       ref: "BiddingCompany",
       required: true,
     },
-    bidAmount: { type: Number, required: true },
-    serviceOffered: { type: String, required: true },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
     bidStatus: {
       type: String,
       required: true,
-      enum: ["pending", "won", "lost"],
+      enum: ["pending", "finished"],
       default: "pending",
     },
   },

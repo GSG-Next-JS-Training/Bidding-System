@@ -3,22 +3,32 @@ import { AddBiddingRequestBody } from "@/components/add-bid/api/request.dto";
 import { Types } from "mongoose";
 import { BiddingCompanyModel } from "@/database/bidding-company-model";
 
-export const createBid = async (biddingCompanyId : Types.ObjectId, bidAmount : number, serviceOffered :string, bidStatus? : string ) : Promise<AddBiddingRequestBody>  =>{
+export const createBid = async (
+  biddingCompanyId: Types.ObjectId,
+  title: string,
+  description: string
+): Promise<AddBiddingRequestBody> => {
   const newBid = await BidModel.create({
     biddingCompanyId,
-    bidAmount,
-    serviceOffered,
-    bidStatus: bidStatus || "pending",
+    title,
+    description,
   });
   return newBid;
-}
+};
 
 export const fetchBids = async () => {
-  const bids = await BidModel.find({}).select('bidAmount serviceOffered bidStatus');
+  const bids = await BidModel.find({}).select(
+    "bidAmount serviceOffered bidStatus"
+  );
   return bids;
-}
+};
 
 export const findBidById = async (userId: Types.ObjectId) => {
-  const bid = await BiddingCompanyModel.findById({userId})
+  const bid = await BiddingCompanyModel.findById({ userId });
   return bid;
-}
+};
+
+export const fetchCompanies = async () => {
+  const companies = await BiddingCompanyModel.find({});
+  return companies;
+};

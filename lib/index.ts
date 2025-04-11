@@ -10,7 +10,7 @@ export const redirectByRole = (role: UserRoles, router: AppRouterInstance) => {
       router.push("/offer-dashboard");
       break;
     case "admin":
-      router.push("/dashboard/admin");
+      router.push("/admin-dashboard");
       break;
     default:
       router.push("/login");

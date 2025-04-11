@@ -6,7 +6,6 @@ export interface IOffersCompany extends Document {
   registrationNumber: string;
   location: string;
   servicesProvided: string[];
-  discountRate: number;
 }
 
 const offersCompanySchema = new Schema<IOffersCompany>(
@@ -16,7 +15,6 @@ const offersCompanySchema = new Schema<IOffersCompany>(
     registrationNumber: { type: String, required: true, unique: true },
     location: { type: String, required: true },
     servicesProvided: [{ type: String, required: true }],
-    discountRate: { type: Number, required: true },
   },
   { timestamps: true }
 );

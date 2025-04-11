@@ -19,7 +19,7 @@ const useLogin = () => {
   const { mutate: loginMutate, isPending } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      dispatch(loginSuccess({ token: data.token, userType: data.userType }));
+      dispatch(loginSuccess({userName:data.userName, token: data.token, userType: data.userType,userId:data.userId }));
       displaySnackbar({ type: "success", message: "success login" });
       redirectByRole(data.userType, router);
     },

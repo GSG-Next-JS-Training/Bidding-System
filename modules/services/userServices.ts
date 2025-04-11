@@ -12,3 +12,8 @@ export const updateConfirmEmailRecord = async (email: string | unknown) => {
   );
   return user;
 };
+
+export const retrieveUsers = async () => {
+  const users = await userModel.find({});
+  return users;
+};

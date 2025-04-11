@@ -3,9 +3,10 @@ import { Schema, model, Document, Types ,models} from "mongoose";
 
 export interface IOffer extends Document {
   offersCompanyId: Types.ObjectId;
-  offerDiscount: number;
-  serviceOffered: string;
+  ammount:string;
+  description: string;
   offerStatus: OfferStatus;
+  bidId: Types.ObjectId
 }
 
 const offerSchema = new Schema<IOffer>(
@@ -15,14 +16,19 @@ const offerSchema = new Schema<IOffer>(
       ref: "OffersCompany",
       required: true,
     },
-    offerDiscount: { type: Number, required: true },
-    serviceOffered: { type: String, required: true },
+    ammount: { type: String, required: true },
+    description: { type: String, required: true },
     offerStatus: {
       type: String,
       required: true,
       enum: ["active", "expired"],
       default: "active",
     },
+    bidId:{
+      type: Schema.Types.ObjectId,
+      ref: "bid",
+      required: true,
+    }
   },
   { timestamps: true }
 );

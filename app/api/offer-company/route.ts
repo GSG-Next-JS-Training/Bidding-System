@@ -1,5 +1,5 @@
 import { handlerWrapper } from "@/lib/apiHandler";
-import { createCompany } from "@/modules/services/offerCompanyServices";
+import { createCompany, fetchCompanies } from "@/modules/services/offerCompanyServices";
 import { NextRequest, NextResponse } from "next/server";
 
 export const addOfferCompanyHandler = async (req: NextRequest) => {
@@ -12,4 +12,11 @@ export const addOfferCompanyHandler = async (req: NextRequest) => {
   });
 };
 
+
+const getCompanies = async () => {
+  const companies = await fetchCompanies();
+  return NextResponse.json({ companies }, { status: 200 });
+};
+
 export const POST = handlerWrapper(addOfferCompanyHandler);
+export const GET = handlerWrapper(getCompanies);

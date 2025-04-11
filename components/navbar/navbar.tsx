@@ -4,6 +4,8 @@ import { useMemo } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { logOut } from "@/feaures/authSlice/authSlice";
+import useGetBiddingCompany from "./hooks/useGetBiddingCompany";
+import useGetOfferCompany from "./hooks/useGetOfferCompany";
 
 interface ILink {
   name: string;
@@ -12,28 +14,30 @@ interface ILink {
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { userType } = useAppSelector((state) => state.auth);
+  const { userType, userId, userName } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const isBidding = userType === "bedding-company";
+  const isAdmin = userType === "admin";
+  const isOffer = userType === "offer-company";
+  const biddingData = useGetBiddingCompany(userId, isBidding);
+  const offerData = useGetOfferCompany(userId, isOffer);
+
+  const data = isBidding ? biddingData.data : offerData.data;
+
   const links: ILink[] = useMemo(() => {
     if (!userType) return [];
 
     switch (userType) {
       case "admin":
-        return [
-          { name: "Create Account", url: "/create-account" },
-          { name: "New Biddings", url: "/new-biddings" },
-          { name: "Users", url: "/users" },
-        ];
+        return [{ name: "Create Account", url: "/create-account" },{ name: "Users", url: "/users" }];
       case "bedding-company":
         return [
           { name: "My Biddings", url: "/my-biddings" },
           { name: "Add Bidding", url: "/add-bidding" },
         ];
       case "offer-company":
-        return [
-          { name: "My Offers", url: "/my-offers" },
-        ];
+        return [{ name: "My Offers", url: "/my-offers" }];
       default:
         return [];
     }
@@ -46,7 +50,16 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm px-4 lg:px-20">
       <div className="flex-1">
-        <Link href="/" className="text-xl btn-ghost text-primary font-bold">
+        <Link
+          href={
+            isAdmin
+              ? "/admin-dashboard"
+              : isBidding
+              ? "/bidding-dashboard"
+              : "offer-dashboard"
+          }
+          className="text-xl btn-ghost text-primary font-bold"
+        >
           Tending <span className="text-accent">System</span>
         </Link>
       </div>
@@ -81,14 +94,6 @@ const Navbar = () => {
             {link.name}
           </Link>
         ))}
-        {/* <Link
-          className={`relative font-extrabold  text-primary cursor-pointer pb-1 ${
-            pathname === "/" ? "active-link" : "hover-link"
-          }`}
-          href="/"
-        >
-          Home
-        </Link> */}
         {userType ? (
           <div className="dropdown dropdown-end">
             <div
@@ -96,7 +101,7 @@ const Navbar = () => {
               role="button"
               className="btn btn-ghost avatar font-extrabold text-primary"
             >
-              {userType}
+              {isAdmin ? userName : data?.company[0].companyName}
             </div>
             <ul
               tabIndex={0}
@@ -111,7 +116,7 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <a  onClick={logout}>Logout</a>
+                <a onClick={logout}>Logout</a>
               </li>
             </ul>
           </div>
@@ -126,9 +131,6 @@ const Navbar = () => {
       <div className="drawer-side z-50">
         <label htmlFor="menu-drawer" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-base-200">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
           {links.map((link, index) => (
             <li key={index}>
               <Link className="" href={link.url}>
@@ -144,7 +146,7 @@ const Navbar = () => {
               <li>
                 <a>Settings</a>
               </li>
-              <li >
+              <li>
                 <a onClick={logout}>Logout</a>
               </li>
             </>
