@@ -1,17 +1,13 @@
 import Feedback from "@/components/feedback/feedback";
-import Image from "next/image";
-import Link from "next/link";
-
+import HeroSection from "@/components/landing-section";
 
 const page = () => {
   return (
-    <div >
-        <HomeHero/>
-    <Feedback/>
-
-
+    <div>
+      <HeroSection />
+      <Feedback />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
