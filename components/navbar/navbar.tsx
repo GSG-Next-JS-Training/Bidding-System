@@ -30,7 +30,10 @@ const Navbar = () => {
 
     switch (userType) {
       case "admin":
-        return [{ name: "Create Account", url: "/create-account" },{ name: "Users", url: "/users" }];
+        return [
+          { name: "Create Account", url: "/create-account" },
+          { name: "Users", url: "/users" },
+        ];
       case "bedding-company":
         return [
           { name: "My Biddings", url: "/my-biddings" },
@@ -56,7 +59,9 @@ const Navbar = () => {
               ? "/admin-dashboard"
               : isBidding
               ? "/bidding-dashboard"
-              : "offer-dashboard"
+              : isOffer
+              ? "offer-dashboard"
+              : "/"
           }
           className="text-xl btn-ghost text-primary font-bold"
         >
