@@ -1,11 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
-
+import HomeHero from "@/components/landing-section/HeroSection";
 
 const page = () => {
   return (
-    <div >
-
+    <div className=" overflow-hidden" >
+      <HomeHero/>
 
 
     </div>
