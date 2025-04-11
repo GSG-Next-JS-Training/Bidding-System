@@ -5,6 +5,7 @@ import { connection } from "@/lib/mongodb";
 import ReduxProvider from "@/providers/reduxProvider";
 import Snackbar from "@/components/snackbar/snackbar";
 import Navbar from "@/components/navbar/navbar";
+import Footer from "@/components/footer/footer";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 
@@ -22,16 +23,13 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-theme="biddingsystem">
-
-      <body
-        className={`${manrope.className} antialiased min-h-screen w-full `} 
-      >
-        <ReduxProvider>  
-           <Navbar/>
+      <body className={`${manrope.className} antialiased min-h-screen w-full flex flex-col `}>
+        <ReduxProvider>
+          <Navbar />
           <Snackbar />
-          {children}
+          <main className="flex-grow">{children}</main>
+          <Footer />
         </ReduxProvider>
-    
       </body>
     </html>
   );
