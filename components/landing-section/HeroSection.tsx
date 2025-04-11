@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className=" min-h-screen grid grid-cols-10">
+    <section className="min-h-screen grid grid-cols-10">
       <div className="w-full col-span-3 flex flex-col pt-40 pl-10 relative">
         <span className="badge badge-accent badge-lg text-neutral ">
           Find the most secure Bidding system{" "}
@@ -18,7 +18,7 @@ const HeroSection = () => {
           confidence, and connect with reliable opportunities. Your gateway to
           smarter business decisions starts here.
         </p>
-        <div className="w-[2000px] bg-white-400 h-10 absolute bottom-90 z-20 p-10  ">
+        <div className="w-[2000px] bg-white-400 h-10 absolute bottom-50 z-20 p-10">
             <button className=" px-10 py-4 rounded-t-2xl bg-sky-600 text-white shadow-2xl hover:bg-sky-800 duration-500 cursor-pointer">Publish Bids</button>
             <button className="px-10 py-4 text-sky-600 rounded-t-2xl shadow-2xl hover:bg-slate-200 hover:text-white duration-500 cursor-pointer">Add offers</button>
         <div className="w-fit bg-white-400 h-20 z-40 flex   shadow-2xl glass-background rounded-b-xl ">
