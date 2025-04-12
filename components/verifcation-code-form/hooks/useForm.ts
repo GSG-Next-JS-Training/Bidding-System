@@ -7,11 +7,12 @@ import { VerifcationCodeValues } from "../types";
 import { INITIAL_VALUES } from "../constants";
 import { checkVerficationCode } from "../api";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/store";
 
 const useForm = () => {
   const router = useRouter();
-
   const { displaySnackbar } = useSnackbar();
+  const { email } = useAppSelector((state) => state.email);
 
   const { mutate, isPending } = useMutation({
     mutationFn: checkVerficationCode,
@@ -35,7 +36,7 @@ const useForm = () => {
   const formik = useFormik<VerifcationCodeValues>({
     initialValues: INITIAL_VALUES,
     onSubmit: (values) => {
-      mutate(values);
+      mutate({ code: values.code, email });
     },
     validationSchema,
     validateOnMount: true,

@@ -32,6 +32,7 @@ const Navbar = () => {
       case "admin":
         return [
           { name: "Create Account", url: "/create-account" },
+          { name: "Create Bidding Company", url: "/bidding-company" },
           { name: "Users", url: "/users" },
         ];
       case "bedding-company":

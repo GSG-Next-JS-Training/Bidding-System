@@ -3,7 +3,7 @@
 import Image from "next/image";
 import key from "@/public/key.png";
 import { Form, FormikProvider } from "formik";
-import BiddingTextField from "@/component/bidding-text-field";
+import BiddingTextField from "@/components/bidding-text-field";
 import useForm from "./hooks/useForm";
 import Link from "next/link";
 
@@ -27,7 +27,7 @@ const VerficationCodeForm: React.FC = () => {
             <BiddingTextField
               id="Verfication code"
               placeholder="Enter your Verfication code"
-              name=" verfication code"
+              name="code"
               className="w-full mt-2 p-2 input-primary rounded-lg focus:outline-none"
             />
           </div>
@@ -36,7 +36,7 @@ const VerficationCodeForm: React.FC = () => {
             className="btn btn-primary w-full mt-1 rounded-lg"
             disabled={isPending}
           >
-            {isPending ? "Checking code..." : "Send Verfication code"}
+            {isPending ? "Checking code..." : "Submit"}
           </button>
           <Link
             href="/login"

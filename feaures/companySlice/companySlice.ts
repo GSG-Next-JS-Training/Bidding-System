@@ -9,7 +9,7 @@ export const initialState: CompanyState = {
 };
 
 export const companySlice = createSlice({
-  name: "snackbar",
+  name: "company",
   initialState,
   reducers: {
     storeCompany: (state, action: PayloadAction<CompanyState>) => {

@@ -3,9 +3,9 @@
 import Image from "next/image";
 import key from "@/public/key.png";
 import { Form, FormikProvider } from "formik";
-import BiddingTextField from "@/component/bidding-text-field";
 import useForm from "./hooks/useForm";
 import Link from "next/link";
+import BiddingTextField from "../bidding-text-field";
 
 const ResetPassword: React.FC = () => {
   const { formik, isPending } = useForm();
@@ -27,15 +27,17 @@ const ResetPassword: React.FC = () => {
             <BiddingTextField
               id="password"
               placeholder="Enter your password"
-              name=" password"
+              name="password"
               className="w-full mt-2 p-2 input-primary rounded-lg focus:outline-none"
+              type="passowrd"
             />
 
             <BiddingTextField
               id="confirm-password"
               placeholder="confirm your password"
-              name=" confirm-password"
+              name="confirmPassword"
               className="w-full mt-2 p-2 input-primary rounded-lg focus:outline-none"
+              type="passowrd"
             />
           </div>
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import key from "@/public/key.png";
 import Link from "next/link";
 import { Form, FormikProvider } from "formik";
-import BiddingTextField from "@/component/bidding-text-field";
+import BiddingTextField from "@/components/bidding-text-field";
 import useForm from "./hooks/useForm";
 
 const ForgotPasswordForm: React.FC = () => {

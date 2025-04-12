@@ -4,20 +4,21 @@ import { validationSchema } from "../validationSchema";
 import useSnackbar from "@/hooks/useSnackbar";
 import { useMutation } from "@tanstack/react-query";
 import { ForgotPasswordValues } from "../types";
-import { INITIAL_VALUES } from "@/component/handle-login/constant";
+import { INITIAL_VALUES } from "@/components/handle-login/constant";
 import { sendResetLink } from "../api";
-import { useRouter } from "next/router";
-import { setCookie } from "@/utils/cookies";
+import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/store";
+import { storeEmail } from "@/feaures/forgotPassordSlice/forgotPassordSlice";
 
 const useForm = () => {
   const { displaySnackbar } = useSnackbar();
   const router = useRouter();
-
+  const dispatch = useAppDispatch();
   const { mutate, isPending } = useMutation({
     mutationFn: sendResetLink,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       displaySnackbar({ message: "Password code sent ", type: "success" });
-      setCookie("resetEmail", data.email);
+      dispatch(storeEmail({ email: data.email }));
       setTimeout(() => {
         router?.push("/verification-code");
       }, 3000);

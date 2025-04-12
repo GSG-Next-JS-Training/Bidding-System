@@ -79,7 +79,6 @@ const AddUserForm = () => {
             <option value="">Select a role</option>
             <option value="bedding-company">Bedding Company</option>
             <option value="offer-company">Offer Company</option>
-            <option value="admin">Admin</option>
           </select>
         </div>
 

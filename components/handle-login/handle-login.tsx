@@ -50,7 +50,7 @@ const HandleLogin = () => {
               </div>
 
               <div className="flex justify-between items-center mt-4">
-                <Link href={""} className="text-blue-500 hover:underline">
+                <Link href={"/forgot-password"} className="text-blue-500 hover:underline">
                   Forgot your Password?
                 </Link>
                 <button

@@ -9,7 +9,7 @@ import { addBiddingCompany } from "../api";
 
 const useBiddingForm = () => {
   const { displaySnackbar } = useSnackbar();
-
+  
   const { mutate: submitCompany, isPending } = useMutation({
     mutationFn: addBiddingCompany,
     onSuccess: () => {
